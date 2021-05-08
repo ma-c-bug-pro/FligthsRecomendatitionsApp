@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Text size-->
+    <dimen name="btn_text_size_big">25sp</dimen>
+    <dimen name="text_size_big">25sp</dimen>
+    <dimen name="text_size_medium">21sp</dimen>
+    <dimen name="text_size_small">16sp</dimen>
+
+    <!--Margin size-->
+    <dimen name="margins_small">10dp</dimen>
+    <dimen name="margin_medium">15dp</dimen>
+    <dimen name="margin_big">20dp</dimen>
+    <!--Padding size-->
+    <dimen name="padding_small">5dp</dimen>
+    <dimen name="padding_medium">10dp</dimen>
+</resources>
