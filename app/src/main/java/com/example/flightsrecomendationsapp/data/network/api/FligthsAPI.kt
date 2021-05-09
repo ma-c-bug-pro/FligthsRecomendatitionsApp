@@ -1,6 +1,6 @@
-package com.example.flightsrecomendationsapp.data.network
+package com.example.flightsrecomendationsapp.data.network.api
 
-import com.example.flightsrecomendationsapp.data.networkmodel.SearchResult
+import com.example.flightsrecomendationsapp.data.network.networkmodel.SearchResult
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Request
