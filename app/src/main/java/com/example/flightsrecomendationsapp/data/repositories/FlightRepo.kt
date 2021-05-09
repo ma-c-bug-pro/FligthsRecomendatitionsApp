@@ -1,7 +1,7 @@
 package com.example.flightsrecomendationsapp.data.repositories
 
 import com.example.flightsrecomendationsapp.data.network.networkmodel.SearchResult
-import com.example.flightsrecomendationsapp.data.network.api.FlightAPI
+import com.example.flightsrecomendationsapp.data.network.api.FlightApi
 import com.example.flightsrecomendationsapp.util.Coroutines
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -22,7 +22,7 @@ class FlightRepo {
     ): Flow<SearchResult?> {
         val flights = MutableStateFlow<SearchResult?>(null)
         Coroutines.io {
-            val response = FlightAPI().getInterestingFlights(
+            val response = FlightApi().getInterestingFlights(
                 from = from,
                 to = to,
                 dateFrom = dateFrom,
