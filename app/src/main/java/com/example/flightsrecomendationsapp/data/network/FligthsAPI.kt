@@ -34,11 +34,7 @@ interface FlightAPI {
                 .create(FlightAPI::class.java)
         }
 
-        /**
-         * This interceptor is used to add values which are same for every call(v and partner),
-         * but that shouldn't be hardcoded as partner can change and version too, but for the purpose
-         * of this task, it'll remain hardcoded. Should have some API which supplies this values.
-         */
+
         private fun getInterceptor(): OkHttpClient {
 
             return OkHttpClient.Builder()
@@ -53,6 +49,11 @@ interface FlightAPI {
             }
         }
 
+        /**
+         * This interceptor is used to add values which are same for every call(v and partner),
+         * but that shouldn't be hardcoded as partner can change and version too, but will remain same through one lifecycle of app,
+         * but for the purpose of this task, it'll remain hardcoded. Should have some API which supplies this values.
+         */
         private fun getStaticQueryParametersInterceptor(): Interceptor {
             return Interceptor { chain ->
                 val original: Request = chain.request()
