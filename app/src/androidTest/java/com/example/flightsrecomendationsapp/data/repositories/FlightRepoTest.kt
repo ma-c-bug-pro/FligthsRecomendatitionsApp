@@ -2,26 +2,25 @@ package com.example.flightsrecomendationsapp.data.repositories
 
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.runBlocking
-import org.junit.Test
-
-import org.junit.Assert.*
 import org.junit.Before
+import org.junit.Test
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
-class FlightRepoTest {
+class FlightRepoTest: KoinComponent {
 
-    private lateinit var repo: FlightRepo
+    private val repo: FlightRepo by inject()
 
     @Before
     fun setUp() {
-        repo = FlightRepo()
     }
 
     @Test
     fun getFlights() {
         runBlocking {
-            val call = repo.getFlights("LON", "anywhere", "10/05/2021", "11/05/2021")
+            val call = repo.getBestFlights("LON", "anywhere", "11/05/2021", "14/05/2021", "10/05/2021")
             call.collect {  println("Result: $it")
-                println("Response count: ${it?.data?.size}")
+                println("Response count: ${it.data?.size}")
             }
 
         }
