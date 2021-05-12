@@ -11,8 +11,11 @@ import kotlinx.coroutines.flow.Flow
 interface FlightDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun addFlights(flights: List<FlightDataEntity>)
+    fun addFlights(flights: List<FlightDataEntity>)
 
     @Query("SELECT * FROM flight_data ORDER BY id ASC")
-    fun readAllFlights(): Flow<List<FlightDataEntity>?>
+    suspend fun readAllFlights(): List<FlightDataEntity>?
+
+    @Query("SELECT * FROM flight_data WHERE dateShown = :date ORDER BY id ASC")
+    suspend fun readAllFlightsForDate(date: String): List<FlightDataEntity>?
 }

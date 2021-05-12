@@ -1,9 +1,12 @@
 package com.example.flightsrecomendationsapp.data.repositories
 
 import com.example.flightsrecomendationsapp.data.db.AppDatabase
+import com.example.flightsrecomendationsapp.data.db.entities.FlightDataEntity
 import com.example.flightsrecomendationsapp.data.network.api.FlightApi
 import com.example.flightsrecomendationsapp.data.network.api.Resource
 import com.example.flightsrecomendationsapp.data.network.networkmodel.Data
+import com.example.flightsrecomendationsapp.data.network.networkmodel.toEntity
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 
@@ -32,24 +35,42 @@ class FlightRepo(private val flightApi: FlightApi, private val appDb: AppDatabas
                     message = response.errorBody()?.string() ?: "Couldn't retrieve data"
                 )
             )
-        } else if (response.body() != null) {
-            val localData = appDb.flightDao().readAllFlights()
-            localData.collect {
-                val cachedIds = it
+        } else {
+            val responseData = response.body()?.data
+            var result: List<Data>?
+            var localData: List<FlightDataEntity>? =
+                appDb.flightDao().readAllFlightsForDate(currentDate)
+            if (localData != null && localData.size >= 5) {
+                result = responseData?.filter { data ->
+                    data.id in (localData as List<FlightDataEntity>).map {
+                        it.id
+                    }
+                }
+            } else {
+                localData = appDb.flightDao().readAllFlights()
+                val cachedIds = localData
                     ?.toMutableList()
                     ?.mapNotNull { data ->
                         if ((data.dateShown) == currentDate) null else data
                     }?.map { mapedData ->
                         mapedData.id
                     }
-                val data = ArrayList<Data>().apply {
-                    response.body()?.data?.toMutableList()?.removeAll { data ->
+                result = responseData?.toMutableList()
+                result?.toMutableList()?.removeAll { data ->
                         cachedIds?.contains(data.id) == true
                     }
-                }
-                emit(Resource.Success(data))
+                result = result?.take(5)
+                emit(Resource.Success(result?.take(5)))
+                saveShownFlights(result?.map {
+                    it.toEntity(currentDate)
+                })
             }
+        }
+    }
 
+    fun saveShownFlights(flights: List<FlightDataEntity>?) {
+        if (!flights.isNullOrEmpty()){
+            appDb.flightDao().addFlights(flights)
         }
     }
 }

@@ -1,5 +1,7 @@
 package com.example.flightsrecomendationsapp.data.network.networkmodel
 
+import androidx.room.PrimaryKey
+import com.example.flightsrecomendationsapp.data.db.entities.FlightDataEntity
 import com.google.gson.annotations.SerializedName
 
 data class Data(
@@ -92,3 +94,23 @@ data class Data(
     @SerializedName("p3")
     val p3: Int
 )
+
+fun Data.toEntity(dateShown: String): FlightDataEntity {
+    return FlightDataEntity(
+        id,
+        flyFrom,
+        flyTo,
+        cityFrom,
+        cityCodeFrom,
+        cityTo,
+        cityCodeTo,
+        countryFrom.name,
+        countryTo.name,
+        dTime,
+        dTimeUTC,
+        aTime,
+        aTimeUTC,
+        dateShown
+    )
+}
+

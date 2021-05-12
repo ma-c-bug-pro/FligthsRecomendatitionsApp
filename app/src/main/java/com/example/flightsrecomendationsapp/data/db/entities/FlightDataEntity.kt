@@ -19,6 +19,6 @@ data class FlightDataEntity(
     val dTimeUTC: Int,
     val aTime: Int,
     val aTimeUTC: Int,
-    val dateShown: String
+    val dateShown: String?
 
 )
