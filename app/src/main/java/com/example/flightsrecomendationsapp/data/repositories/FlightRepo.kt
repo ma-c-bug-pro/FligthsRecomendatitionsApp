@@ -4,10 +4,9 @@ import com.example.flightsrecomendationsapp.data.db.AppDatabase
 import com.example.flightsrecomendationsapp.data.db.entities.FlightDataEntity
 import com.example.flightsrecomendationsapp.data.network.api.FlightApi
 import com.example.flightsrecomendationsapp.data.network.api.Resource
-import com.example.flightsrecomendationsapp.data.network.networkmodel.Data
+import com.example.flightsrecomendationsapp.data.network.networkmodel.FlightDataDto
 import com.example.flightsrecomendationsapp.data.network.networkmodel.toEntity
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.flow.collect
+import com.example.flightsrecomendationsapp.data.publicmodel.FlightData
 import kotlinx.coroutines.flow.flow
 
 class FlightRepo(private val flightApi: FlightApi, private val appDb: AppDatabase) {
@@ -21,7 +20,7 @@ class FlightRepo(private val flightApi: FlightApi, private val appDb: AppDatabas
         dateFrom: String,
         dateTo: String,
         currentDate: String
-    ) = flow<Resource<List<Data>?>> {
+    ) = flow<Resource<List<FlightData>?>> {
         emit(Resource.Loading())
         val response = flightApi.getInterestingFlights(
             from = from,
@@ -37,13 +36,13 @@ class FlightRepo(private val flightApi: FlightApi, private val appDb: AppDatabas
             )
         } else {
             val responseData = response.body()?.data
-            var result: List<Data>?
-            var localData: List<FlightDataEntity>? =
+            var result: List<FlightDataDto>?
+            var localData: List<FlightDataEntity?>? =
                 appDb.flightDao().readAllFlightsForDate(currentDate)
             if (localData != null && localData.size >= 5) {
                 result = responseData?.filter { data ->
-                    data.id in (localData as List<FlightDataEntity>).map {
-                        it.id
+                    data.id in localData!!.map {
+                        it?.id
                     }
                 }
             } else {
@@ -60,15 +59,18 @@ class FlightRepo(private val flightApi: FlightApi, private val appDb: AppDatabas
                         cachedIds?.contains(data.id) == true
                     }
                 result = result?.take(5)
-                emit(Resource.Success(result?.take(5)))
-                saveShownFlights(result?.map {
-                    it.toEntity(currentDate)
-                })
+
             }
+            emit(Resource.Success(result?.map {
+                it
+            }))
+            saveShownFlights(result?.map {
+                it.toEntity(currentDate)
+            })
         }
     }
 
-    fun saveShownFlights(flights: List<FlightDataEntity>?) {
+    private fun saveShownFlights(flights: List<FlightDataEntity>?) {
         if (!flights.isNullOrEmpty()){
             appDb.flightDao().addFlights(flights)
         }
