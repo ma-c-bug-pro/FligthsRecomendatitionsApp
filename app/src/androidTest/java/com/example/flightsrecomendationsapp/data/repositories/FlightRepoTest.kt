@@ -26,7 +26,6 @@ class FlightRepoTest: KoinComponent {
     @Test
     fun getFlights() {
         runBlocking {
-            val gson = Gson()
             val call = repo.getBestFlights("LON", "anywhere", "11/05/2021", "14/05/2021", DateFormatter.getDate(milliSeconds = System.currentTimeMillis(), locale =  context.resources.configuration.locales[0]))
             call.collect {  println("Result: $it")
                 println("Response count: ${it.data?.size}")

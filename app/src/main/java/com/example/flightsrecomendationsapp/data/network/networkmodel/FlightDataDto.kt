@@ -1,36 +1,36 @@
 package com.example.flightsrecomendationsapp.data.network.networkmodel
 
-import androidx.room.PrimaryKey
 import com.example.flightsrecomendationsapp.data.db.entities.FlightDataEntity
+import com.example.flightsrecomendationsapp.data.publicmodel.FlightData
 import com.google.gson.annotations.SerializedName
 
-data class Data(
+data class FlightDataDto(
     @SerializedName("id")
-    val id: String,
+    override val id: String,
     @SerializedName("flyFrom")
-    val flyFrom: String,
+    override val flyFrom: String,
     @SerializedName("flyTo")
-    val flyTo: String,
+    override val flyTo: String,
     @SerializedName("cityFrom")
-    val cityFrom: String,
+    override val cityFrom: String,
     @SerializedName("cityCodeFrom")
-    val cityCodeFrom: String,
+    override val cityCodeFrom: String,
     @SerializedName("cityTo")
-    val cityTo: String,
+    override val cityTo: String,
     @SerializedName("cityCodeTo")
-    val cityCodeTo: String,
+    override val cityCodeTo: String,
     @SerializedName("countryFrom")
-    val countryFrom: Country,
+    override val countryFrom: CountryDto,
     @SerializedName("countryTo")
-    val countryTo: Country,
+    override val countryTo: CountryDto,
     @SerializedName("dTime")
-    val dTime: Int,
+    override val dTime: Int,
     @SerializedName("dTimeUTC")
-    val dTimeUTC: Int,
+    override val dTimeUTC: Int,
     @SerializedName("aTime")
-    val aTime: Int,
+    override val aTime: Int,
     @SerializedName("aTimeUTC")
-    val aTimeUTC: Int,
+    override val aTimeUTC: Int,
     @SerializedName("type_flights")
     val typeFlights: List<String>,
     @SerializedName("nightsInDest")
@@ -42,27 +42,27 @@ data class Data(
     @SerializedName("distance")
     val distance: Double,
     @SerializedName("duration")
-    val duration: Duration,
+    val duration: DurationDto,
     @SerializedName("fly_duration")
     val flyDuration: String,
     @SerializedName("price")
     val price: Int,
     @SerializedName("conversion")
-    val conversion: Conversion,
+    val conversion: ConversionDto,
     @SerializedName("discount_data")
-    val discountData: DiscountData,
+    val discountData: DiscountDataDto,
     @SerializedName("bags_price")
-    val bagsPrice: BagsPrice,
+    val bagsPrice: BagsPriceDto,
     @SerializedName("baglimit")
-    val baglimit: Baglimit,
+    val baglimit: BaglimitDto,
     @SerializedName("availability")
-    val availability: Availability,
+    val availability: AvailabilityDto,
     @SerializedName("routes")
     val routes: List<List<String>>,
     @SerializedName("airlines")
     val airlines: List<String>,
     @SerializedName("route")
-    val route: List<Route>,
+    val route: List<RouteDto>,
     @SerializedName("booking_token")
     val bookingToken: String,
     @SerializedName("deep_link")
@@ -93,9 +93,9 @@ data class Data(
     val p2: Int,
     @SerializedName("p3")
     val p3: Int
-)
+): FlightData()
 
-fun Data.toEntity(dateShown: String): FlightDataEntity {
+fun FlightDataDto.toEntity(dateShown: String): FlightDataEntity {
     return FlightDataEntity(
         id,
         flyFrom,
@@ -104,8 +104,8 @@ fun Data.toEntity(dateShown: String): FlightDataEntity {
         cityCodeFrom,
         cityTo,
         cityCodeTo,
-        countryFrom.name,
-        countryTo.name,
+        countryFrom.toEntity(),
+        countryTo.toEntity(),
         dTime,
         dTimeUTC,
         aTime,

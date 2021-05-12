@@ -2,7 +2,7 @@ package com.example.flightsrecomendationsapp.data.network.networkmodel
 
 import com.google.gson.annotations.SerializedName
 
-data class Route(
+data class RouteDto(
     @SerializedName("id")
     val id: String,
     @SerializedName("combination_id")

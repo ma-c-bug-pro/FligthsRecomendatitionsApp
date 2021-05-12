@@ -2,11 +2,11 @@ package com.example.flightsrecomendationsapp.data.network.networkmodel
 
 import com.google.gson.annotations.SerializedName
 
-data class SearchParams(
+data class SearchParamsDto(
     @SerializedName("flyFrom_type")
     val flyFromType: String,
     @SerializedName("to_type")
     val toType: String,
     @SerializedName("seats")
-    val seats: Seats
+    val seats: SeatsDto
 )

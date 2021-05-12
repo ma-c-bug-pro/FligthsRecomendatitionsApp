@@ -2,7 +2,7 @@ package com.example.flightsrecomendationsapp.data.network.networkmodel
 
 import com.google.gson.annotations.SerializedName
 
-data class Baglimit(
+data class BaglimitDto(
     @SerializedName("hand_height")
     val handHeight: Int,
     @SerializedName("hand_length")

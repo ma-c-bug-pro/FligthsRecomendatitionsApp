@@ -17,5 +17,5 @@ interface FlightDao {
     suspend fun readAllFlights(): List<FlightDataEntity>?
 
     @Query("SELECT * FROM flight_data WHERE dateShown = :date ORDER BY id ASC")
-    suspend fun readAllFlightsForDate(date: String): List<FlightDataEntity>?
+    suspend fun readAllFlightsForDate(date: String): List<FlightDataEntity?>?
 }

@@ -2,7 +2,7 @@ package com.example.flightsrecomendationsapp.data.network.networkmodel
 
 import com.google.gson.annotations.SerializedName
 
-data class AllPrices(
+data class AllPricesDto(
         @SerializedName("21-22")
         val x2122: Int,
         @SerializedName("33-35")

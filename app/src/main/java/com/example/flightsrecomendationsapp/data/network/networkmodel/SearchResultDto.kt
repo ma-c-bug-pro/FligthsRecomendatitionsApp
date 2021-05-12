@@ -1,9 +1,8 @@
 package com.example.flightsrecomendationsapp.data.network.networkmodel
 
-
 import com.google.gson.annotations.SerializedName
 
-data class SearchResult(
+data class SearchResultDto(
     @SerializedName("search_id")
     val searchId: String,
     @SerializedName("time")
@@ -13,21 +12,21 @@ data class SearchResult(
     @SerializedName("fx_rate")
     val fxRate: Int,
     @SerializedName("data")
-    val `data`: List<Data>,
+    val `data`: List<FlightDataDto>,
     @SerializedName("_results")
     val results: Int,
     @SerializedName("best_results")
     val bestResults: List<Any>,
     @SerializedName("search_params")
-    val searchParams: SearchParams,
+    val searchParams: SearchParamsDto,
     @SerializedName("hashtags")
-    val hashtags: List<Hashtag>,
+    val hashtags: List<HashtagDto>,
     @SerializedName("location_hashtags")
     val locationHashtags: List<String>,
     @SerializedName("airlinesList")
     val airlinesList: List<Any>,
     @SerializedName("airportsList")
-    val airportsList: List<Airports>,
+    val airportsList: List<AirportsDto>,
     @SerializedName("all_airlines")
     val allAirlines: List<Any>,
     @SerializedName("all_stopover_airports")
@@ -35,7 +34,7 @@ data class SearchResult(
     @SerializedName("all_stopover_countries")
     val allStopoverCountries: List<String>,
     @SerializedName("all_prices")
-    val allPrices: AllPrices,
+    val allPrices: AllPricesDto,
     @SerializedName("del")
     val del: Int,
     @SerializedName("currency_rate")

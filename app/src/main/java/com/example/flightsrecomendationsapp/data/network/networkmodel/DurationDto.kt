@@ -2,7 +2,7 @@ package com.example.flightsrecomendationsapp.data.network.networkmodel
 
 import com.google.gson.annotations.SerializedName
 
-data class Duration(
+data class DurationDto(
     @SerializedName("departure")
     val departure: Int,
     @SerializedName("return")
