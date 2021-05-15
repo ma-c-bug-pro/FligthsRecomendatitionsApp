@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".fragments.UserDetailsFragment">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background">
+
+            <ImageView
+                android:id="@+id/destination_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintDimensionRatio="1"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_scrollFlags="scroll" />
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+                app:layout_scrollFlags="scroll">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <LinearLayout
+                        android:id="@+id/left_info"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toLeftOf="@id/right_info"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/margin_big"
+                            android:layout_marginTop="@dimen/margin_big"
+                            android:text="@string/price_string"
+                            android:textSize="25sp"
+                            app:layout_constraintLeft_toRightOf="@id/destination_text"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/destination_image" />
+
+                        <TextView
+                            android:id="@+id/price_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/margin_big"
+                            android:layout_marginTop="@dimen/margin_big"
+                            android:textSize="25sp"
+                            tools:text="300" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/margin_big"
+                            android:layout_marginTop="@dimen/margin_big"
+                            android:text="@string/seats_available_string"
+                            android:textSize="25sp"
+                            app:layout_constraintLeft_toRightOf="@id/destination_text"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/destination_image" />
+
+                        <TextView
+                            android:id="@+id/seats_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/margin_big"
+                            android:layout_marginTop="@dimen/margin_big"
+                            android:textSize="25sp"
+                            tools:text="17" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/margin_big"
+                            android:layout_marginTop="@dimen/margin_big"
+                            android:text="@string/departure_string"
+                            android:textSize="25sp" />
+
+                        <TextView
+                            android:id="@+id/departure_time_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/margin_big"
+                            android:layout_marginTop="@dimen/margin_big"
+                            android:textSize="25sp"
+                            tools:text="18:00:00" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/margin_big"
+                            android:layout_marginTop="@dimen/margin_big"
+                            android:text="@string/arrival__string"
+                            android:textSize="25sp" />
+
+                        <TextView
+                            android:id="@+id/arrival_time_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/margin_big"
+                            android:layout_marginTop="@dimen/margin_big"
+                            android:paddingBottom="@dimen/margin_big"
+                            android:textSize="25sp"
+                            tools:text="19:00:00" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/right_info"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintLeft_toRightOf="@id/left_info"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/margin_big"
+                            android:layout_marginTop="@dimen/margin_big"
+                            android:text="@string/departure_string"
+                            android:textSize="25sp" />
+
+                        <TextView
+                            android:id="@+id/from_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/margin_big"
+                            android:layout_marginTop="@dimen/margin_big"
+                            android:textSize="25sp"
+                            tools:text="Belgrade" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/margin_big"
+                            android:layout_marginTop="@dimen/margin_big"
+                            android:text="@string/destination_string"
+                            android:textSize="25sp" />
+
+                        <TextView
+                            android:id="@+id/destination_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/margin_big"
+                            android:layout_marginTop="@dimen/margin_big"
+                            android:textSize="25sp"
+                            tools:text="Budapest" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/margin_big"
+                            android:layout_marginTop="@dimen/margin_big"
+                            android:text="@string/distance_km_string"
+                            android:textSize="25sp"
+                            app:layout_constraintLeft_toRightOf="@id/destination_text"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/destination_image" />
+
+                        <TextView
+                            android:id="@+id/distance_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/margin_big"
+                            android:layout_marginTop="@dimen/margin_big"
+                            android:textSize="25sp"
+                            tools:text="300" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/margin_big"
+                            android:layout_marginTop="@dimen/margin_big"
+                            android:text="@string/fly_duration_h_string"
+                            android:textSize="25sp"
+                            app:layout_constraintLeft_toRightOf="@id/destination_text"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/destination_image" />
+
+                        <TextView
+                            android:id="@+id/fly_duration_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/margin_big"
+                            android:layout_marginTop="@dimen/margin_big"
+                            android:textSize="25sp"
+                            tools:text="3" />
+                    </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.core.widget.NestedScrollView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>
