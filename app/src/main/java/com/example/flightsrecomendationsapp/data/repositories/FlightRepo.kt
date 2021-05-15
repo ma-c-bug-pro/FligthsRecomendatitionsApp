@@ -6,7 +6,7 @@ import com.example.flightsrecomendationsapp.data.network.api.FlightApi
 import com.example.flightsrecomendationsapp.data.network.api.Resource
 import com.example.flightsrecomendationsapp.data.network.networkmodel.FlightDataDto
 import com.example.flightsrecomendationsapp.data.network.networkmodel.toEntity
-import com.example.flightsrecomendationsapp.data.publicmodel.FlightData
+import com.example.flightsrecomendationsapp.data.publicmodel.IFlightData
 import kotlinx.coroutines.flow.flow
 
 class FlightRepo(private val flightApi: FlightApi, private val appDb: AppDatabase) {
@@ -19,8 +19,8 @@ class FlightRepo(private val flightApi: FlightApi, private val appDb: AppDatabas
         to: String,
         dateFrom: String,
         dateTo: String,
-        currentDate: String
-    ) = flow<Resource<List<FlightData>?>> {
+        currentDate: String = dateFrom
+    ) = flow<Resource<List<IFlightData>?>> {
         emit(Resource.Loading())
         val response = flightApi.getInterestingFlights(
             from = from,
@@ -43,7 +43,7 @@ class FlightRepo(private val flightApi: FlightApi, private val appDb: AppDatabas
                 result = responseData?.filter { data ->
                     data.id in localData!!.map {
                         it?.id
-                    }
+                    } && data.availability.seats != null && data.availability.seats > 0
                 }
             } else {
                 localData = appDb.flightDao().readAllFlights()
@@ -55,11 +55,12 @@ class FlightRepo(private val flightApi: FlightApi, private val appDb: AppDatabas
                         mapedData.id
                     }
                 result = responseData?.toMutableList()
-                result?.toMutableList()?.removeAll { data ->
-                        cachedIds?.contains(data.id) == true
-                    }
-                result = result?.take(5)
-
+                result = result?.filter { data ->
+                    data.availability.seats != null && data.availability.seats > 0 && cachedIds?.contains(data.id) != true
+                }
+                result = result?.distinctBy {
+                    it.cityCodeTo
+                }?.take(5)
             }
             emit(Resource.Success(result?.map {
                 it

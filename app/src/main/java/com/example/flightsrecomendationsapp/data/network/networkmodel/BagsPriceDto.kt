@@ -9,4 +9,8 @@ data class BagsPriceDto(
     val x1: Double,
     @SerializedName("2")
     val x2: Double
-)
+) {
+    override fun toString(): String {
+        return "[hand: $hand], [x1: $x1], [x2: $x2]"
+    }
+}
