@@ -3,7 +3,7 @@ package com.example.flightsrecomendationsapp.data.db.convertors
 import androidx.room.TypeConverter
 import com.example.flightsrecomendationsapp.data.db.entities.CountryEntity
 
-class CountryConvertor {
+internal class CountryConvertor {
     @TypeConverter
     fun fromString(value: String?): CountryEntity? {
         val splited = value?.split(":")

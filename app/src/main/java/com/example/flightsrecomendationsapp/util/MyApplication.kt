@@ -1,6 +1,7 @@
 package com.example.flightsrecomendationsapp.util
 
 import android.app.Application
+import com.example.flightsrecomendationsapp.util.di.AppModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.GlobalContext.startKoin
@@ -17,7 +18,8 @@ class MyApplication : Application() {
                 listOf(
                     NetworkModule,
                     DbModule,
-                    RepoModule
+                    RepoModule,
+                    AppModule
                 )
             )
         }

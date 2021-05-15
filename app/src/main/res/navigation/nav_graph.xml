@@ -9,5 +9,19 @@
         android:id="@+id/mainFragment"
         android:name="com.example.flightsrecomendationsapp.ui.mainscreen.MainFragment"
         android:label="fragment_main"
-        tools:layout="@layout/fragment_main" />
+        tools:layout="@layout/fragment_main">
+
+        <action
+            android:id="@+id/action_mainFragment_to_popularOfferFragment"
+            app:destination="@id/popularOfferFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/popularOfferFragment"
+        android:name="com.example.flightsrecomendationsapp.ui.offersscreen.PopularOfferFragment"
+        android:label="PopularOfferFragment">
+        <argument
+            android:name="location"
+            app:argType="string"
+            android:defaultValue="-1" />
+    </fragment>
 </navigation>

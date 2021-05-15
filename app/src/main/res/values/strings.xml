@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">FlightsRecomendationsApp</string>
+    <string name="requiredLocationPermissionsText">"To use our feature \"Get flights from nearest airports\", our application requires location permission."</string>
+    <string name="requestPermission">Allow location permission access</string>
+    <string name="declinePermission">Decline location permission access</string>
+    <string name="neverAskAgainLocation">Decline and never ask again</string>
+    <string name="get_nearest">Get nearest</string>
+    <string name="select_location">Select location</string>
+    <string name="destination_string">Destination:</string>
+    <string name="price_string">Price:</string>
+    <string name="seats_available_string">Seats available</string>
+    <string name="departure_string">Departure:</string>
+    <string name="price_euro_string">Price(Euro):</string>
+    <string name="distance_km_string">Distance(km):</string>
+    <string name="fly_duration_h_string">Fly duration(h):</string>
+    <string name="arrival__string">Arrival:</string>
+    <string name="generic_error_text">"Something went wrong. Please try again. "</string>
 </resources>
